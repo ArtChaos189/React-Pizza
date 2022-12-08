@@ -1,7 +1,7 @@
 import React from "react";
 import "../scss/app.scss";
 
-const Categories = ({ value, onClickCategory }) => {
+export const Categories = ({ value, onClickCategory }) => {
   const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 
   return (
@@ -16,5 +16,3 @@ const Categories = ({ value, onClickCategory }) => {
     </div>
   );
 };
-
-export default Categories;
