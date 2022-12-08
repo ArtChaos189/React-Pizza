@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Skeleton } from "../components";
 
 export const FullPizza = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [pizza, setPizza] = React.useState();
 
   React.useEffect(() => {
@@ -15,11 +16,12 @@ export const FullPizza = () => {
         setPizza(data);
       } catch (error) {
         alert("Ошибка при получении пиццы!");
+        navigate("/");
       }
     }
 
     fetchPizza();
-  }, [id]);
+  }, [id, navigate]);
 
   if (!pizza) {
     return <Skeleton />;
