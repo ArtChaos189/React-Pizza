@@ -6,18 +6,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from "../components";
 
-import { SearchContext } from "../App";
 import { setCategoryId, setCurrentPage } from "../redux/slice/filterSlice";
 import { setItems } from "../redux/slice/pizzasSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categoryId, currentPage, sort } = useSelector((state) => state.filter);
+  const { categoryId, currentPage, sort, searchValue } = useSelector((state) => state.filter);
   const { items } = useSelector((state) => state.pizzas);
 
   const [isLoading, setIsLoading] = React.useState(true);
-
-  const { searchValue } = React.useContext(SearchContext);
 
   React.useEffect(() => {
     const axiosPizzas = async () => {
