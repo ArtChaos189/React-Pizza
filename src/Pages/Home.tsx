@@ -1,18 +1,17 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { Categories, Sort, PizzaBlock, Skeleton, Pagination } from "../components";
+import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "../components";
 
-import { setCategoryId, setCurrentPage } from "../redux/slice/filterSlice";
-import { setItems } from "../redux/slice/pizzasSlice";
+import { selectPizzas, setItems } from "../redux/slice/pizzasSlice";
+import { selectFilter, setCategoryId } from "../redux/slice/filterSlice";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { categoryId, currentPage, sort, searchValue } = useSelector((state) => state.filter);
-  const { items } = useSelector((state) => state.pizzas);
+  const { categoryId, currentPage, sort, searchValue } = useSelector(selectFilter);
+  const { items } = useSelector(selectPizzas);
 
   const [isLoading, setIsLoading] = React.useState(true);
 
@@ -40,25 +39,28 @@ const Home = () => {
     axiosPizzas();
   }, [categoryId, sort, searchValue, currentPage, dispatch]);
 
+  const onChangeCategory = React.useCallback(
+    (id: number) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch]
+  );
+
   return (
     <div className="container">
       <div className="content__top">
-        <Categories onClickCategory={(i) => dispatch(setCategoryId(i))} value={categoryId} />
-        <Sort />
+        <Categories onChangeCategory={onChangeCategory} />
+        <SortPopup sort={sort} />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
         {isLoading
-          ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+          ? [...new Array(4)].map((_, index) => <Skeleton key={index} />)
           : items
-              .filter((obj) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
-              .map((obj) => (
-                <Link key={obj.id} to={`/pizza/${obj.id}`}>
-                  <PizzaBlock {...obj} />
-                </Link>
-              ))}
+              .filter((obj: { name: string }) => obj.name.toLowerCase().includes(searchValue.toLowerCase()))
+              .map((obj: any) => <PizzaBlock key={obj.id} {...obj} />)}
       </div>
-      <Pagination onChangePage={(number) => dispatch(setCurrentPage(number))} />
+      <Pagination />
     </div>
   );
 };

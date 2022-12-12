@@ -1,37 +1,46 @@
 import React, { useState, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { setSort } from "../redux/slice/filterSlice";
+import { useDispatch } from "react-redux";
+import { setSort, sortPropertyEnum, Sort } from "../redux/slice/filterSlice";
 
 import "../scss/app.scss";
 
-export const list = [
-  { name: "↑популярности", sortProperty: "rating" },
-  { name: "↓популярности", sortProperty: "-rating" },
-  { name: "↑цене", sortProperty: "price" },
-  { name: "↓цене", sortProperty: "-price" },
-  { name: "↑алфавиту", sortProperty: "name" },
-  { name: "↓алфавиту", sortProperty: "-name" },
+type SortItem = {
+  name: string;
+  sortProperty: sortPropertyEnum;
+};
+
+type PopupClick = MouseEvent & {
+  path: Node[];
+};
+
+type SortProps = {
+  sort: Sort;
+};
+
+export const list: SortItem[] = [
+  { name: "↑популярности", sortProperty: sortPropertyEnum.RATING_DESC },
+  { name: "↓популярности", sortProperty: sortPropertyEnum.RATING_ASC },
+  { name: "↑цене", sortProperty: sortPropertyEnum.PRICE_DESC },
+  { name: "↓цене", sortProperty: sortPropertyEnum.PRICE_ASC },
+  { name: "↑алфавиту", sortProperty: sortPropertyEnum.NAME_DESC },
+  { name: "↓алфавиту", sortProperty: sortPropertyEnum.NAME_ASC },
 ];
 
-export const Sort = () => {
+export const SortPopup: React.FC<SortProps> = React.memo(({ sort }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const { sort } = useSelector((state) => state.filter);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
-  const onClickSort = (i) => {
-    dispatch(setSort(i));
-  };
-
-  const onClickListItem = (i) => {
-    onClickSort(i);
+  const onClickListItem = (obj: SortItem) => {
+    dispatch(setSort(obj));
     setOpen(false);
   };
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!event.path.includes(sortRef.current)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setOpen(false);
       }
     };
@@ -71,4 +80,4 @@ export const Sort = () => {
       )}
     </div>
   );
-};
+});

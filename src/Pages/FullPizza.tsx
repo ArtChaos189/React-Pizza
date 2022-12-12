@@ -7,7 +7,11 @@ import { Skeleton } from "../components";
 export const FullPizza = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [pizza, setPizza] = React.useState();
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
 
   React.useEffect(() => {
     async function fetchPizza() {

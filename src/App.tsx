@@ -1,11 +1,10 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./Pages/Home";
 import NotFound from "./Pages/NotFound";
 import Cart from "./Pages/Cart";
 import { FullPizza } from "./Pages/FullPizza";
-import "./scss/app.scss";
+
 //https://637c882872f3ce38eaa4fa33.mockapi.io/items
 
 function App() {
