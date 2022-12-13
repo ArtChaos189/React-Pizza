@@ -1,6 +1,5 @@
-import styles from "./NotFoundBlock.module.scss";
-
-const NotFoundBlock = () => {
+import styles from "../not-found-views/not-found.module.scss";
+const NotFound = () => {
   return (
     <div className={styles.root}>
       <h1>
@@ -13,4 +12,4 @@ const NotFoundBlock = () => {
   );
 };
 
-export default NotFoundBlock;
+export default NotFound;

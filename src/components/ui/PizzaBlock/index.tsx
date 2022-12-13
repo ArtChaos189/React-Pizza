@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { addItems } from "../../redux/slice/cartSlice";
+import { addItems } from "../../../redux/slice/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { CartItem } from "../../redux/slice/cartSlice";
+import { CartItem } from "../../../redux/slice/cartSlice";
 
 type PizzaProps = {
   id: string;
