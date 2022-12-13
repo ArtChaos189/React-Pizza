@@ -1,7 +1,7 @@
 import { CartEmpty } from "../../components/ui/CartEmpty";
 import { CartItems } from "../../components/ui/CartItems";
 import { Link } from "react-router-dom";
-import { clearItems, selectCart } from "../../redux/slice/cartSlice";
+import { clearItems, selectCart } from "../../redux/slice/cart/slice";
 import { useSelector, useDispatch } from "react-redux";
 
 import trashIcon from "./assets/trash.svg";

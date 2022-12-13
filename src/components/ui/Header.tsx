@@ -2,7 +2,7 @@ import React from "react";
 import Search from "./Search";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../redux/slice/cartSlice";
+import { selectCart } from "../../redux/slice/cart/slice";
 import LogoSvg from "../../assets/img/pizza-logo.svg";
 
 const Header = () => {
