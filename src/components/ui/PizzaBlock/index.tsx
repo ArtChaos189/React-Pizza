@@ -18,7 +18,7 @@ export const PizzaBlock: React.FC<PizzaProps> = ({ id, name, price, imageUrl, si
   const [activeType, setACtiveType] = React.useState(0);
   const [activeSize, setACtiveSize] = React.useState(0);
   const dispatch = useDispatch();
-  const cartItem = useSelector((state: any) => state.cart.items.find((obj: any) => obj.id === id));
+  const cartItem = useSelector((state: any) => state.cart.pizzas.find((obj: any) => obj.id === id));
 
   const typeNames = ["тонкое", "традиционное"];
 
