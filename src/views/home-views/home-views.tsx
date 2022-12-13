@@ -8,7 +8,7 @@ import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "../../c
 import { selectPizzas, setItems } from "../../redux/slice/pizzas/slice";
 import { selectFilter, setCategoryId } from "../../redux/slice/filter/slice";
 
-const Home = () => {
+export const Home = () => {
   const dispatch = useDispatch();
   const { categoryId, currentPage, sort, searchValue } = useSelector(selectFilter);
   const { items } = useSelector(selectPizzas);
@@ -64,5 +64,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;

@@ -1,14 +1,11 @@
-import { calcTotalPrice } from "../../../lib/utilis/calcTotalPrice";
-import { getCartFromLS } from "../../../lib/utilis/getCartFromLC";
+import { calcTotalPrice } from "../../../lib/utils/calculateTotalPrice";
 import { RootState } from "../../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem, CartSliceState } from "./types";
 
-const cartData = getCartFromLS();
-
 const initialState: CartSliceState = {
-  items: cartData.items,
-  totalPrice: cartData.totalPrice,
+  pizzas: [],
+  totalPrice: 0,
 };
 
 export const CartSlice = createSlice({
@@ -16,29 +13,29 @@ export const CartSlice = createSlice({
   initialState,
   reducers: {
     addItems(state, action: PayloadAction<CartItem>) {
-      const findItem = state.items.find((obj) => obj.id === action.payload.id);
+      const findItem = state.pizzas.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
       } else {
-        state.items.push({ ...action.payload, count: 1 });
+        state.pizzas.push({ ...action.payload, count: 1 });
       }
-      state.totalPrice = calcTotalPrice(state.items);
+      state.totalPrice = calcTotalPrice(state.pizzas);
     },
 
     removeItems(state, action: PayloadAction<string>) {
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
-      state.totalPrice = calcTotalPrice(state.items);
+      state.pizzas = state.pizzas.filter((obj) => obj.id !== action.payload);
+      state.totalPrice = calcTotalPrice(state.pizzas);
     },
     clearItems(state) {
-      state.items = [];
+      state.pizzas = [];
       state.totalPrice = 0;
     },
     minusItem(state, action: PayloadAction<string>) {
-      const findItem = state.items.find((obj) => obj.id === action.payload);
+      const findItem = state.pizzas.find((obj) => obj.id === action.payload);
       if (findItem) {
         findItem.count--;
       }
-      state.totalPrice = calcTotalPrice(state.items);
+      state.totalPrice = calcTotalPrice(state.pizzas);
     },
   },
 });
