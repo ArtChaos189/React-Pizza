@@ -3,10 +3,10 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "../../components/ui";
+import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "components/ui";
 
-import { selectPizzas, setItems } from "../../redux/slice/pizzas/slice";
-import { selectFilter, setCategoryId } from "../../redux/slice/filter/slice";
+import { selectPizzas, setItems } from "redux/slice/pizzas/slice";
+import { selectFilter, setCategoryId } from "redux/slice/filter/slice";
 
 export const Home = () => {
   const dispatch = useDispatch();

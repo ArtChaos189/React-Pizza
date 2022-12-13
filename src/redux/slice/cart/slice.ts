@@ -1,4 +1,4 @@
-import { calcTotalPrice } from "../../../lib/utils/calculateTotalPrice";
+import { calcTotalPrice } from "lib/utils/calculateTotalPrice";
 import { RootState } from "../../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem, CartSliceState } from "./types";

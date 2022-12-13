@@ -2,7 +2,7 @@ import axios from "axios";
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { Skeleton } from "../../components/ui";
+import { Skeleton } from "components/ui";
 
 export const FullPizza = () => {
   const { id } = useParams();
