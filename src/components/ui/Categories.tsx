@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useSelector } from "react-redux";
-import { selectFilter } from "../../redux/slice/filter/slice";
+import { selectFilter } from "redux/slice/filter/slice";
 import { useWhyDidYouUpdate } from "ahooks";
 
 type CategoriesProps = {

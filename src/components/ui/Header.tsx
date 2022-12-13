@@ -1,9 +1,9 @@
 import Search from "./Search";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../redux/slice/cart/slice";
-import LogoSvg from "../../assets/img/pizza-logo.svg";
-import { CartItem } from "../../redux/slice/cart/types";
+import { selectCart } from "redux/slice/cart/slice";
+import LogoSvg from "assets/img/pizza-logo.svg";
+import { CartItem } from "redux/slice/cart/types";
 import React from "react";
 
 export const Header = () => {
