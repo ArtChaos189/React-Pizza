@@ -12,7 +12,7 @@ import { FullPizza } from "views/full-pizza-views/full-pizza-views";
 
 //https://637c882872f3ce38eaa4fa33.mockapi.io/items
 
-function App() {
+export function App() {
   return (
     <div className="wrapper">
       <Header />
@@ -27,5 +27,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
