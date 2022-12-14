@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { addItems } from "../../redux/slice/cartSlice";
+import { addItems } from "redux/slice/cart/slice";
 import { useSelector, useDispatch } from "react-redux";
-import { CartItem } from "../../redux/slice/cartSlice";
+import { CartItem } from "redux/slice/cart/types";
 
 type PizzaProps = {
   id: string;
@@ -18,7 +18,7 @@ export const PizzaBlock: React.FC<PizzaProps> = ({ id, name, price, imageUrl, si
   const [activeType, setACtiveType] = React.useState(0);
   const [activeSize, setACtiveSize] = React.useState(0);
   const dispatch = useDispatch();
-  const cartItem = useSelector((state: any) => state.cart.items.find((obj: any) => obj.id === id));
+  const cartItem = useSelector((state: any) => state.cart.pizzas.find((obj: any) => obj.id === id));
 
   const typeNames = ["тонкое", "традиционное"];
 

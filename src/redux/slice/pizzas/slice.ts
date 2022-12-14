@@ -1,18 +1,6 @@
-import { RootState } from "./../store";
+import { RootState } from "../../store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Pizzas = {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  sizes: number[];
-  types: number[];
-};
-
-interface PizasSliceState {
-  items: Pizzas[];
-}
+import { PizasSliceState, Pizzas } from "./types";
 
 const initialState: PizasSliceState = {
   items: [],

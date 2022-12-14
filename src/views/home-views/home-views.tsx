@@ -3,12 +3,12 @@ import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "../components";
+import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "components/ui";
 
-import { selectPizzas, setItems } from "../redux/slice/pizzasSlice";
-import { selectFilter, setCategoryId } from "../redux/slice/filterSlice";
+import { selectPizzas, setItems } from "redux/slice/pizzas/slice";
+import { selectFilter, setCategoryId } from "redux/slice/filter/slice";
 
-const Home = () => {
+export const Home = () => {
   const dispatch = useDispatch();
   const { categoryId, currentPage, sort, searchValue } = useSelector(selectFilter);
   const { items } = useSelector(selectPizzas);
@@ -64,5 +64,3 @@ const Home = () => {
     </div>
   );
 };
-
-export default Home;
