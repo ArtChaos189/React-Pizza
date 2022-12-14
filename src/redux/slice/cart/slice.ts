@@ -16,7 +16,8 @@ export const CartSlice = createSlice({
       const findItem = state.pizzas.find((obj) => obj.id === action.payload.id);
       if (findItem) {
         findItem.count++;
-      } else {
+      }
+      if (!findItem) {
         state.pizzas.push({ ...action.payload, count: 1 });
       }
       state.totalPrice = calcTotalPrice(state.pizzas);
