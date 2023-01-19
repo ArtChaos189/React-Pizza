@@ -1,21 +1,28 @@
-import React from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "components/ui";
-
 import { selectPizzas, setItems } from "redux/slice/pizzas/slice";
+
 import { selectFilter, setCategoryId } from "redux/slice/filter/slice";
 
+import { Categories, SortPopup, PizzaBlock, Skeleton, Pagination } from "components/ui";
+
 export const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { categoryId, currentPage, sort, searchValue } = useSelector(selectFilter);
   const { items } = useSelector(selectPizzas);
 
-  const [isLoading, setIsLoading] = React.useState(true);
+  const onChangeCategory = useCallback(
+    (id: number) => {
+      dispatch(setCategoryId(id));
+    },
+    [dispatch]
+  );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const axiosPizzas = async () => {
       setIsLoading(true);
       const category = categoryId > 0 ? `category=${categoryId}` : "";
@@ -24,7 +31,7 @@ export const Home = () => {
 
       try {
         const { data } = await axios.get(
-          `https://637c882872f3ce38eaa4fa33.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}`
+          `https://63a746c37989ad3286edc1b1.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}`
         );
         dispatch(setItems(data));
       } catch (error) {
@@ -38,13 +45,6 @@ export const Home = () => {
 
     axiosPizzas();
   }, [categoryId, sort, searchValue, currentPage, dispatch]);
-
-  const onChangeCategory = React.useCallback(
-    (id: number) => {
-      dispatch(setCategoryId(id));
-    },
-    [dispatch]
-  );
 
   return (
     <div className="container">

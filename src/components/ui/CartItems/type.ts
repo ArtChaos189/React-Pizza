@@ -1,4 +1,4 @@
-export type CartItem = {
+export type CartItemProps = {
   id: string;
   name: string;
   price: number;
@@ -6,9 +6,4 @@ export type CartItem = {
   sizes: number;
   types: string;
   count: number;
-};
-
-export type CartSliceState = {
-  totalPrice: number;
-  pizzas: CartItem[];
 };

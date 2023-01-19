@@ -1,14 +1,20 @@
-import { CartEmpty } from "components/ui/CartEmpty";
-import { CartItems } from "components/ui/CartItems";
 import { Link } from "react-router-dom";
-import { clearItems, selectCart } from "redux/slice/cart/slice";
+
 import { useSelector, useDispatch } from "react-redux";
+
+import { CartEmpty } from "components/ui/CartEmpty";
+
+import { CartItems } from "components/ui/CartItems/CartItems";
+
+import { clearItems, selectCart } from "redux/slice/cart/slice";
 
 import trashIcon from "./assets/trash.svg";
 
 export const Cart = () => {
   const dispatch = useDispatch();
   const { pizzas, totalPrice } = useSelector(selectCart);
+
+  const totalCount = pizzas.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClickClear = () => {
     if (window.confirm("Oчистить корзину?")) {
@@ -18,8 +24,6 @@ export const Cart = () => {
   if (!totalPrice) {
     return <CartEmpty />;
   }
-  console.log(totalPrice);
-  const totalCount = pizzas.reduce((sum: number, item: any) => sum + item.count, 0);
 
   return (
     <div className="container container--cart">

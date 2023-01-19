@@ -1,16 +1,16 @@
-import React from "react";
+import { memo } from "react";
 
 import { useSelector } from "react-redux";
-import { selectFilter } from "redux/slice/filter/slice";
+
 import { useWhyDidYouUpdate } from "ahooks";
 
-type CategoriesProps = {
-  getCategories?: (categories: string[]) => void;
-  onChangeCategory: (id: number) => void;
-};
+import { selectFilter } from "redux/slice/filter/slice";
+
+import { CategoriesProps } from "./type";
+
 const categories = ["Все", "Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"];
 
-export const Categories: React.FC<CategoriesProps> = React.memo(({ getCategories, onChangeCategory }) => {
+export const Categories: React.FC<CategoriesProps> = memo(({ getCategories, onChangeCategory }) => {
   useWhyDidYouUpdate("Categories", { getCategories, onChangeCategory });
 
   const { categoryId } = useSelector(selectFilter);

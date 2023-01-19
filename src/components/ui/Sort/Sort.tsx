@@ -1,23 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 
 import { useDispatch } from "react-redux";
+
 import { setSort } from "redux/slice/filter/slice";
-import { Sort, sortPropertyEnum } from "redux/slice/filter/types";
+
+import { sortPropertyEnum } from "redux/slice/filter/types";
+
+import { PopupClick, SortItem, SortProps } from "./type";
 
 import "styles/app.scss";
-
-type SortItem = {
-  name: string;
-  sortProperty: sortPropertyEnum;
-};
-
-type PopupClick = MouseEvent & {
-  path: Node[];
-};
-
-type SortProps = {
-  sort: Sort;
-};
 
 export const list: SortItem[] = [
   { name: "↑популярности", sortProperty: sortPropertyEnum.RATING_DESC },
@@ -28,10 +19,10 @@ export const list: SortItem[] = [
   { name: "↓алфавиту", sortProperty: sortPropertyEnum.NAME_ASC },
 ];
 
-export const SortPopup: React.FC<SortProps> = React.memo(({ sort }) => {
+export const SortPopup: React.FC<SortProps> = memo(({ sort }) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const sortRef = React.useRef<HTMLDivElement>(null);
+  const sortRef = useRef<HTMLDivElement>(null);
 
   const onClickListItem = (obj: SortItem) => {
     dispatch(setSort(obj));
